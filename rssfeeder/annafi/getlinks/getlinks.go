@@ -32,7 +32,7 @@ func main() {
 	matcher := func(n *html.Node) bool {
 		// must check for nil values
 		if n.DataAtom == atom.A {
-			//			fmt.Println(n.Parent)
+			
 			return scrape.Attr(n.Parent, "class") == "grid-item"
 		}
 		return false

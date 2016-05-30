@@ -14,7 +14,7 @@ func TestMain(m *testing.M) {
 
 func setup() {
 	
-	fmt.Println("Start")
+	fmt.Println("Start111222")
 	
 }
 func shutdown() {

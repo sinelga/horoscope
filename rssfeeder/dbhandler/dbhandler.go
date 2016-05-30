@@ -3,14 +3,13 @@ package dbhandler
 import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	//	"domains"
 	"fmt"
 	"log"
 )
 
 func CheckIfExist(session mgo.Session, site string, link string) {
 
-	fmt.Println("KSKSKSKSKS")
+	fmt.Println("KSKSKSKSKS111")
 	
 	session.SetMode(mgo.Monotonic, true)
 
