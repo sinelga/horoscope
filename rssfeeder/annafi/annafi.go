@@ -19,7 +19,7 @@ func main() {
 		panic(err)
 
 	}
-//lslsls				
+		
 	articles := scrape.FindAll(root, scrape.ByClass("article__body"))
 
 	for _, article := range articles {
