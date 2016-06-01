@@ -28,7 +28,9 @@ func main() {
 	
 	for _,link :=range tofeedzodiaclinks {
 		
-		parse_page.Parse(link)
+		zodiacs :=parse_page.Parse(link)
+		
+		dbhandler.UpdateContents(*session,"test.com",link,zodiacs)		
 		
 	}
 	
