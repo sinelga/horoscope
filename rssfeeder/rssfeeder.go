@@ -3,24 +3,15 @@ package main
 import (
 	//	"blogfeeder/addlink"
 	"encoding/csv"
-	"github.com/sinelga/horoscope_libs/domains"
-	//	"encoding/json"
-	//	"flag"
 	"fmt"
-	//	"github.com/SlyMarbo/rss"
-	//	"github.com/gosimple/slug"
+	"github.com/sinelga/horoscope_libs/domains"
 	"gopkg.in/gcfg.v1"
-	"log"
-	//	"path/filepath"
-	//	"dbhandler"
 	"gopkg.in/mgo.v2"
+	"log"
 	//	"net/http"
+	"github.com/sinelga/horoscope_libs/dbhandler"
 	"github.com/sinelga/horoscope_libs/getlinks"
 	"os"
-	//	"github.com/yhat/scrape"
-	//	"golang.org/x/net/html"
-	//	"golang.org/x/net/html/atom"
-	//	"time"
 )
 
 //var rootdir = ""
@@ -81,14 +72,29 @@ func main() {
 	defer session.Close()
 
 	fmt.Println(resorses)
-	
-	for _, res := range resorses {	
-		
-		links :=getlinks.GetLinks(res.Link)
+
+	for _, res := range resorses {
+
+		links := getlinks.GetLinks(res.Link)
 		fmt.Println(links)
+
+		for _, link := range links {
+
+			site_exist := dbhandler.CheckIfExist(*session, "test.com", link.Link)
+
+			if site_exist {
+				
+				dbhandler.CheckIfLinksExist(*session, "test.com", link.Link)
+				
+			} else {
+
+				dbhandler.InsertNewSite(*session, "test.com", link.Link)
+			}
+
+		}
+
 	}
-	
-	
+
 	//	linksdir := filepath.Join(rootdir, "links")
 
 	//	uniqstitle := dbhandler.GetAllStitle(*session, locale, themes)
